@@ -1,3 +1,5 @@
+#include recipes-st/images/st-image.inc
+
 inherit core-image
 IMAGE_INSTALL += "usbutils"
 
