@@ -13,4 +13,5 @@ IMAGE_INSTALL:append = " vim"
 IMAGE_INSTALL:append = " dpkg"
 #IMAGE_INSTALL:append = " libmystatic-staticdev"
 #IMAGE_INSTALL:append = " libmydynamic"
+IMAGE_INSTALL:append = " packagegroup-pad"
 

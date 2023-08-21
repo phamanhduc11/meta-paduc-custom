@@ -1,0 +1,22 @@
+From a8bd2e2e284355073b310c9726b3757f1ea29b02 Mon Sep 17 00:00:00 2001
+From: Pham Anh Duc <phamanhduc11@gmail.com>
+Date: Fri, 18 Aug 2023 21:54:18 -0700
+Subject: [PATCH] mypatch
+
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index a7d3419..9b8a1b9 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -11,4 +11,4 @@ main.cpp)
+ 
+ target_link_libraries(calculator my_math my_print)
+ 
+-install(TARGETS calculator DESTINATION bin)
++install(TARGETS calculator)
+-- 
+2.25.1
+
