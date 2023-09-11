@@ -1,0 +1,50 @@
+From b39b40b6b13a10b9345a359169b6c03dda115a1c Mon Sep 17 00:00:00 2001
+From: Pham Anh Duc <phamanhduc11@gmail.com>
+Date: Sun, 3 Sep 2023 10:42:00 -0700
+Subject: [PATCH] add ssd1309 device, modify reset dela
+
+---
+ arch/arm/boot/dts/stm32mp157a-dk1.dts | 16 ++++++++++++++++
+ drivers/video/fbdev/ssd1307fb.c       |  2 +-
+ 2 files changed, 17 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/stm32mp157a-dk1.dts b/arch/arm/boot/dts/stm32mp157a-dk1.dts
+index f48207dad..67c15df11 100644
+--- a/arch/arm/boot/dts/stm32mp157a-dk1.dts
++++ b/arch/arm/boot/dts/stm32mp157a-dk1.dts
+@@ -20,3 +20,19 @@ chosen {
+ 		stdout-path = "serial0:115200n8";
+ 	};
+ };
++
++&i2c5 {
++	clock-frequency = <400000>;
++	status = "okay";
++	oled_1309: oled@3d {
++		compatible = "solomon,ssd1309fb-i2c";
++		reg = <0x3d>;
++		solomon,height = <64>;
++		solomon,width = <128>;
++		solomon,page-offset = <0>;
++		solomon,segment-no-remap;
++		solomon,prechargep2 = <15>;
++		reset-gpios = <&gpiof 5 GPIO_ACTIVE_LOW>;
++		status = "okay";
++	};	
++};
+diff --git a/drivers/video/fbdev/ssd1307fb.c b/drivers/video/fbdev/ssd1307fb.c
+index 1e2f71c2f..82df67a4b 100644
+--- a/drivers/video/fbdev/ssd1307fb.c
++++ b/drivers/video/fbdev/ssd1307fb.c
+@@ -761,7 +761,7 @@ static int ssd1307fb_probe(struct i2c_client *client)
+ 	if (par->reset) {
+ 		/* Reset the screen */
+ 		gpiod_set_value_cansleep(par->reset, 1);
+-		udelay(4);
++		udelay(10);
+ 		gpiod_set_value_cansleep(par->reset, 0);
+ 		udelay(4);
+ 	}
+-- 
+2.25.1
+

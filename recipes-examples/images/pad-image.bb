@@ -15,3 +15,9 @@ IMAGE_INSTALL:append = " dpkg"
 #IMAGE_INSTALL:append = " libmydynamic"
 IMAGE_INSTALL:append = " packagegroup-pad"
 
+#For mounting disks on boot by systemd
+CORE_IMAGE_EXTRA_INSTALL += " \
+    resize-helper \
+    \
+    packagegroup-framework-core-base    \
+    "
